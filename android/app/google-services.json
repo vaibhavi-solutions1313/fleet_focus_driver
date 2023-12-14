@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "29565148878",
+    "project_id": "staffinsoftware-d4ec5",
+    "storage_bucket": "staffinsoftware-d4ec5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:29565148878:android:3c972522e9a70b1575ba9f",
+        "android_client_info": {
+          "package_name": "com.example.staffin_softwares"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn20ff6Q2d4WAEGROE8dMjUa0-P8F6Jcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
