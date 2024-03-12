@@ -1,13 +1,123 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:staffin_softwares/app/app_constants/app_colors.dart';
 import 'package:staffin_softwares/app/app_constants/app_strings.dart';
 
 import '../../../app_constants/app_Images.dart';
 import '../../../app_widgets/app_text_styles.dart';
+import '../../home/bindings/home_binding.dart';
+import '../../home/views/home_view.dart';
 import '../controllers/splash_screen_controller.dart';
 
-class SplashScreenView extends GetView<SplashScreenController> {
+class SplashScreenView extends StatefulWidget {
+  const SplashScreenView({super.key});
+
+  @override
+  State<SplashScreenView> createState() => _SplashScreenViewState();
+}
+
+class _SplashScreenViewState extends State<SplashScreenView> with TickerProviderStateMixin {
+  late final AnimationController _animationController = AnimationController(
+    vsync: this,
+    duration: Duration(milliseconds: 2000),
+  );
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose(); // Dispose of the controller on widget disposal
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    SplashScreenController controller=Get.put(SplashScreenController());
+    return Scaffold(
+      body: Column(
+        children: [
+          Expanded(
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/splashAndLogo/splash_background.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+                Center(
+                  child: ScaleTransition(
+                    // scale: _animationController,
+                    scale: Tween<double>(begin: 0.3, end: 1.0)
+                        .animate(_animationController),
+                    child: Image.asset(
+                      'assets/splashAndLogo/fleet_focus_logo.png',
+                      width: 400,
+                      height: 250,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          InkWell(
+            borderRadius: BorderRadius.circular(15.0),
+            onTap: () => controller.tryAutoLogin(),
+            // onTap: () => Get.to(() => const ProfileView(),
+            //                 binding: ProfileBinding()
+            //             ),
+            // onTap: () => Get.to(() => const HomeView(), binding: HomeBinding()),
+            child: Container(
+              height: 50,
+              width: 154,
+              margin: EdgeInsets.only(top: 15.0, bottom: 30.0),
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                gradient: LinearGradient(
+                  begin: Alignment.bottomCenter,
+                  end: Alignment.topCenter,
+                  colors: [AppColors.splashDark, AppColors.splashLight],
+                ),
+              ),
+              // style: ElevatedButton.styleFrom(backgroundColor: isDelete ? Colors.red :OurColor.highlightBG, padding: EdgeInsets.symmetric(vertical: 14.sp, horizontal: 15.sp)),
+              // onPressed: onTap,
+              child: Center(
+                child: Text(
+                  'Get Started',
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w600),
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+
+      // body: Stack(
+      //   children: [
+      //     Image.asset(
+      //       "assets/splash_view.png",
+      //       width: Get.width,
+      //       height: Get.height,
+      //       fit: BoxFit.cover,
+      //     ),
+      //     Positioned(bottom: 35.sp,right: 0,left: 0,child: Center(child: SizedBox(width: 25.sp,height: 10.sp,child: LinearProgressIndicator())))
+      //   ],
+      // )
+    );
+  }
+}
+
+/*class SplashScreenView extends GetView<SplashScreenController> {
   const SplashScreenView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -159,4 +269,4 @@ class MyCustomClipper extends CustomClipper<Path>{
     // TODO: implement shouldReclip
     throw UnimplementedError();
   }
-}
+}*/

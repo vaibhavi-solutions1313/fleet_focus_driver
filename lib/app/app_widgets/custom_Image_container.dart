@@ -25,53 +25,131 @@ class CustomImageContainer extends GetView{
     return Column(
       children: [
         SizedBox(height: 12.0,),
-       Obx(() => TextFormField(
-         onTap: ()async{
-           controller.text=(await AppServices().selectImageFromGallery())?.path??'';
-           if(controller.text.isNotEmpty){
-             showPrefix.value=true;
-           }else{
-             showPrefix.value=false;
-           }
-         },
-         controller: controller,
-         keyboardType: textInputType,
-         readOnly: true,
-         validator: (v){
-           if(isValidatorRequired){
-             if(v!.isEmpty) {
-               return 'Fill the field';
-             }else{
-               return null;
-             }
-           }else{
-             return null;
-           }
+        Container(
+          height: 120,
+          margin: EdgeInsets.symmetric(horizontal: 8),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.btnMedium1.withOpacity(0.5),
+                blurRadius: 3,
+                spreadRadius: 0.5,
+                offset: Offset(0, 2),
+              ),
+            ],
+          ),
+          child: TextFormField(
+            onTap: ()async{
+              controller.text=(await AppServices().selectImageFromGallery())?.path??'';
+              if(controller.text.isNotEmpty){
+                showPrefix.value=true;
+              }else{
+                showPrefix.value=false;
+              }
+            },
+            controller: controller,
+            keyboardType: textInputType,
+            readOnly: true,
+            validator: (v){
+              if(isValidatorRequired){
+                if(v!.isEmpty) {
+                  return 'Fill the field';
+                }else{
+                  return null;
+                }
+              }else{
+                return null;
+              }
 
-         },
-         onChanged: (v){
-           if(controller.text.isNotEmpty){
-             showPrefix.value=true;
-           }else{
-             showPrefix.value=false;
-           }
-         },
+            },
+            onChanged: (v){
+              if(controller.text.isNotEmpty){
+                showPrefix.value=true;
+              }else{
+                showPrefix.value=false;
+              }
+            },
 
-         decoration: InputDecoration(
-           contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-           filled: true,
-           fillColor: AppColors.textFilledColor,
-           border: OutlineInputBorder(
-               borderRadius: BorderRadius.circular(12.0),
-               borderSide: BorderSide.none
-           ),
-           hintText: hinText,
-           prefix: showPrefix.value?Text('$hinText:',style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),):Text(''),
-           hintStyle: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),
-           suffixIcon: Icon(Icons.cloud_upload_outlined),
-           suffixIconColor: AppColors.appPrimaryLightColor,
-         ),
-       )),
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+              filled: true,
+              fillColor: AppColors.whiteColor,
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: BorderSide.none
+              ),
+              hintText: hinText,
+              // prefix: showPrefix.value?Text('$hinText:',style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),):Text(''),
+              hintStyle: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textAndOutlineColor),
+              prefixIcon: Icon(Icons.cloud_upload_outlined),
+              prefixIconColor: AppColors.textAndOutlineColor,
+            ),
+          ),
+        )
+       // Obx(() => Container(
+       //   margin: EdgeInsets.symmetric(horizontal: 8),
+       //   decoration: BoxDecoration(
+       //     color: Colors.white,
+       //     borderRadius: BorderRadius.circular(12),
+       //     boxShadow: [
+       //       BoxShadow(
+       //         color: AppColors.btnMedium1.withOpacity(0.5),
+       //         blurRadius: 3,
+       //         spreadRadius: 0.5,
+       //         offset: Offset(0, 2),
+       //       ),
+       //     ],
+       //   ),
+       //   child: TextFormField(
+       //     onTap: ()async{
+       //       controller.text=(await AppServices().selectImageFromGallery())?.path??'';
+       //       if(controller.text.isNotEmpty){
+       //         showPrefix.value=true;
+       //       }else{
+       //         showPrefix.value=false;
+       //       }
+       //     },
+       //     controller: controller,
+       //     keyboardType: textInputType,
+       //     readOnly: true,
+       //     validator: (v){
+       //       if(isValidatorRequired){
+       //         if(v!.isEmpty) {
+       //           return 'Fill the field';
+       //         }else{
+       //           return null;
+       //         }
+       //       }else{
+       //         return null;
+       //       }
+       //
+       //     },
+       //     onChanged: (v){
+       //       if(controller.text.isNotEmpty){
+       //         showPrefix.value=true;
+       //       }else{
+       //         showPrefix.value=false;
+       //       }
+       //     },
+       //
+       //     decoration: InputDecoration(
+       //       contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+       //       filled: true,
+       //       fillColor: AppColors.whiteColor,
+       //       border: OutlineInputBorder(
+       //           borderRadius: BorderRadius.circular(12.0),
+       //           borderSide: BorderSide.none
+       //       ),
+       //       hintText: hinText,
+       //       // prefix: showPrefix.value?Text('$hinText:',style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),):Text(''),
+       //       hintStyle: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textAndOutlineColor),
+       //       prefixIcon: Icon(Icons.cloud_upload_outlined),
+       //       prefixIconColor: AppColors.textAndOutlineColor,
+       //     ),
+       //   ),
+       // )),
       ],
     );
   }

@@ -44,37 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyCgODIatOe3iRdBPKPAENtyTi_FBlOyV2A',
-    appId: '1:29565148878:web:2852922337004e3575ba9f',
-    messagingSenderId: '29565148878',
-    projectId: 'staffinsoftware-d4ec5',
-    authDomain: 'staffinsoftware-d4ec5.firebaseapp.com',
-    storageBucket: 'staffinsoftware-d4ec5.appspot.com',
+    apiKey: 'AIzaSyAeczaBvXG5HXCvWo6btAxsRn5o-mQYRe8',
+    appId: '1:1042373550213:web:f27b7dcff35768eee389ec',
+    messagingSenderId: '1042373550213',
+    projectId: 'fleet-focus-pro',
+    authDomain: 'fleet-focus-pro.firebaseapp.com',
+    storageBucket: 'fleet-focus-pro.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDn20ff6Q2d4WAEGROE8dMjUa0-P8F6Jcs',
-    appId: '1:29565148878:android:3c972522e9a70b1575ba9f',
-    messagingSenderId: '29565148878',
-    projectId: 'staffinsoftware-d4ec5',
-    storageBucket: 'staffinsoftware-d4ec5.appspot.com',
+    apiKey: 'AIzaSyB4ea66U3ZIbCMqMp6ige0fUuccx_WhIt8',
+    appId: '1:1042373550213:android:caf1b0791339b46ae389ec',
+    messagingSenderId: '1042373550213',
+    projectId: 'fleet-focus-pro',
+    storageBucket: 'fleet-focus-pro.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDOtSCO03dQHeYbMe_wZle5pTUiUgYFjo0',
-    appId: '1:29565148878:ios:9d49a2aa388f139975ba9f',
-    messagingSenderId: '29565148878',
-    projectId: 'staffinsoftware-d4ec5',
-    storageBucket: 'staffinsoftware-d4ec5.appspot.com',
-    iosBundleId: 'com.example.staffinSoftwares',
+    apiKey: 'AIzaSyBMxmXIVSPe-a0kctdXuKX5E7oFWX455HQ',
+    appId: '1:1042373550213:ios:3f7a47e895db9bcee389ec',
+    messagingSenderId: '1042373550213',
+    projectId: 'fleet-focus-pro',
+    storageBucket: 'fleet-focus-pro.appspot.com',
+    iosBundleId: 'com.app.fleetfocusprodriver',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDOtSCO03dQHeYbMe_wZle5pTUiUgYFjo0',
-    appId: '1:29565148878:ios:96e78a0360730adb75ba9f',
-    messagingSenderId: '29565148878',
-    projectId: 'staffinsoftware-d4ec5',
-    storageBucket: 'staffinsoftware-d4ec5.appspot.com',
-    iosBundleId: 'com.example.staffinSoftwares.RunnerTests',
+    apiKey: 'AIzaSyBMxmXIVSPe-a0kctdXuKX5E7oFWX455HQ',
+    appId: '1:1042373550213:ios:163fa3268d9a47f7e389ec',
+    messagingSenderId: '1042373550213',
+    projectId: 'fleet-focus-pro',
+    storageBucket: 'fleet-focus-pro.appspot.com',
+    iosBundleId: 'com.app.fleetfocusprodriver.RunnerTests',
   );
 }

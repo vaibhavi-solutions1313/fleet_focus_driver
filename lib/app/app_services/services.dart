@@ -1,8 +1,5 @@
 import 'dart:async';
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
@@ -27,7 +24,156 @@ class AppServices {
   Future showLoader() async {}
   ////////////////////////////////////////////////////////////
 
-  Future determinePosition() async {
+  Future<void> determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check if the user has already denied location permission forever
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.deniedForever) {
+      await showPermissionDeniedForeverDialog();
+      return;
+    }
+
+    // Check if the user has denied or granted location permission
+    if (permission == LocationPermission.denied) {
+      // Show a confirmation dialog before requesting permission
+      bool allowLocation = await showPermissionConfirmationDialog();
+
+      if (!allowLocation) {
+        // User denied permission in the confirmation dialog
+        return;
+      }
+
+      // Request location permission
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        // User denied permission
+        return;
+      }
+    }
+
+    // Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      await showLocationServiceDisabledDialog();
+      return;
+    }
+
+    // Continue with getting the user's location
+    userPosition = await Geolocator.getCurrentPosition();
+  }
+
+  Future<bool> showPermissionConfirmationDialog() async {
+    return await Get.defaultDialog(
+      barrierDismissible: false,
+      title: 'Location Permission',
+      titlePadding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 30.0),
+      titleStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.black
+      ),
+      radius: 5.0,
+      contentPadding: EdgeInsets.all(15.0),
+      content: Column(
+        children: [
+          Text('We need your location permission to create fast, accurate routes, deliver efficient services and provide correct latitude and longitude coordinates. Granting access enhances navigation, ensures precision and improves mapping, enabling seamless and effective functionality in this applictaion and it\'s services.',
+            style: TextStyle(
+              fontSize: 14,
+            ),),
+          SizedBox(height: 8,),
+          Text('Location is used in the background even when the app is closed to the working of Location Sharing feature of the application',
+            style: TextStyle(
+              fontSize: 14,
+            ),),
+          SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Get.back(result: false); // Deny permission
+                },
+                child: Text('Deny'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Get.back(result: true); // Allow permission
+                },
+                child: Text('Allow'),
+                style: ButtonStyle(
+                  // padding: EdgeInsets.all(15.0),
+                    backgroundColor: MaterialStateProperty.resolveWith<Color?>(
+                          (Set<MaterialState> states) {
+                        if (states.contains(MaterialState.pressed)) {
+                          // Color when button is pressed
+                          return Colors.blue.withOpacity(0.3);
+                        } else {
+                          // Default color
+                          return Colors.blue.withOpacity(0.3);
+                        }
+                      },
+                    ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    ) ?? false;
+  }
+
+  Future<void> showPermissionDeniedForeverDialog() async {
+    await Get.defaultDialog(
+      title: 'Permission Denied',
+      content: Text(
+        'Location permission is permanently denied. Please enable it in your device settings.',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: Text('OK'),
+        ),
+        TextButton(
+          onPressed: () {
+            // Open app settings
+            Geolocator.openAppSettings();
+            Get.back();
+          },
+          child: Text('Open Settings'),
+        ),
+      ],
+    );
+  }
+
+  Future<void> showLocationServiceDisabledDialog() async {
+    await Get.defaultDialog(
+      title: 'Location Service Disabled',
+      content: Text(
+        'Location services are disabled. Please enable them in your device settings.',
+      ),
+      actions: [
+        TextButton(
+          onPressed: () {
+            Get.back();
+          },
+          child: Text('OK'),
+        ),
+        TextButton(
+          onPressed: () {
+            // Open location settings
+            Geolocator.openLocationSettings();
+            Get.back();
+          },
+          child: Text('Open Location Settings'),
+        ),
+      ],
+    );
+  }
+
+  /*Future determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -52,7 +198,7 @@ class AppServices {
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Text('We cannot process further without location access. please allow location permission from phone settings'),
+                      Text('We cannot process further without location access. Please allow location permission from phone settings'),
                       Row(
                         children: [
                           TextButton(
@@ -137,7 +283,8 @@ class AppServices {
           userPosition = await Geolocator.getCurrentPosition();
         }
       });
-    } else {
+    }
+    else {
       userPosition = await Geolocator.getCurrentPosition();
     }
     Geolocator.getServiceStatusStream().listen((ServiceStatus status) async {
@@ -196,7 +343,7 @@ class AppServices {
         userPosition = await Geolocator.getCurrentPosition();
       }
     });
-  }
+  }*/
 
   getLocation() async {
     bool serviceEnabled;

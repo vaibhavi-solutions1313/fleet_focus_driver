@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:staffin_softwares/main.dart';
 
-import '../../../../main.dart';
+import '../../../app_widgets/custom_bottom_sheet.dart';
+import '../../../app_widgets/custom_grid_item.dart';
 import '../../../app_widgets/custom_loader.dart';
+import '../../auth_page/views/bank_details_view.dart';
+import '../../auth_page/views/basic_details_view.dart';
+import '../../auth_page/views/license_detail.dart';
+import '../../auth_page/views/upload_image_view.dart';
+import '../../auth_page/views/visa_passport_detail_view.dart';
 import '../providers/profile_provider.dart';
 
 class ProfileController extends GetxController {
@@ -54,6 +60,69 @@ class ProfileController extends GetxController {
  // RxString isRegisteredForGst='Yes'.obs;
  // RxBool isReadTermsAndCondition=false.obs;
 
+  var profileDetailsList = <GridItem>[
+    GridItem(
+      image: 'assets/daily_login/truck_customer_img.png',
+      title: '1. Basic Details',
+      subtitle: 'Incomplete'.obs,
+      icon: 'assets/daily_login/red_wrong.png'.obs,
+      onTap: () {
+        CustomBottomSheet.show(
+          BasicDetailsView(),
+        );
+      },
+    ),
+    GridItem(
+      image: 'assets/daily_login/visa_details.png',
+      title: '2. Visa & Passport Details',
+      subtitle: 'Incomplete'.obs,
+      icon: 'assets/daily_login/red_wrong.png'.obs,
+      onTap: () {
+        CustomBottomSheet.show(
+            VisaPassportDetails()
+        );
+      },
+    ),
+    GridItem(
+      image: 'assets/daily_login/truck_customer_img.png',
+      title: '3. License Detail',
+      subtitle: 'Incomplete'.obs,
+      icon: 'assets/daily_login/red_wrong.png'.obs,
+      onTap: () {
+        CustomBottomSheet.show(
+          LicenseDetailsView(),
+        );
+      },
+    ),
+    GridItem(
+      image: 'assets/daily_login/bank_details.png',
+      title: '4. Bank Details',
+      subtitle: 'Incomplete'.obs,
+      icon: 'assets/daily_login/red_wrong.png'.obs,
+      onTap: () {
+        CustomBottomSheet.show(
+          BankDetailsView(),
+        );
+      },
+    ),
+    GridItem(
+      image: 'assets/daily_login/truck_img.png',
+      title: '5. Upload Images',
+      subtitle: 'Incomplete'.obs,
+      icon: 'assets/daily_login/red_wrong.png'.obs,
+      onTap: () {
+        CustomBottomSheet.show(
+          UploadImagesView(),
+        );
+      },
+    ),
+
+  ];
+
+  void updateGridItem(int index){
+    profileDetailsList[index].icon.value = 'assets/daily_login/green_tick.png';
+    profileDetailsList[index].subtitle.value = 'Completed';
+  }
 
   @override
   void onInit() {

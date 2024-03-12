@@ -32,6 +32,28 @@ class Text14By400 extends GetView{
   }
 }
 ///////////////////////////////////////////////////////////////////////////////////////
+
+class DeclarationText extends GetView{
+  final String text;
+  final Color textColor;
+  const DeclarationText(  {super.key,required this.text,this.textColor=AppColors.lightBlackishTextColor69,});
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Text(text,
+      style: TextStyle(
+          fontSize: 14,
+          height: 2.0,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.normal,
+          letterSpacing: 0.2,
+          color: AppColors.lightBlackTextColor
+      ),
+    );
+  }
+}
+///////////////////////////////////////////////////////////////////////////////////////
 class Text14By700 extends GetView{
   final String text;
   final Color textColor;

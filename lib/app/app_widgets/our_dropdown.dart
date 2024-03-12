@@ -35,11 +35,14 @@ class _OurListObjectDropDownState extends State<OurListObjectDropDown> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      margin: EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(12),
-
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+              color: AppColors.textAndOutlineBottom,
+              width: 1.0
+          )
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.0),
@@ -47,9 +50,17 @@ class _OurListObjectDropDownState extends State<OurListObjectDropDown> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             DropdownButton<dynamic>(
-              hint: Text(
-                widget.hintText,
-                style: GoogleFonts.urbanist(fontSize: 16, color: Colors.black.withOpacity(0.65), fontWeight: FontWeight.w400),
+              hint: ShaderMask(
+                blendMode: BlendMode.srcIn,
+                shaderCallback: (bounds) => LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [AppColors.textAndOutlineTop.withOpacity(0.6), AppColors.textAndOutlineBottom.withOpacity(0.6)],
+                ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                child: Text(
+                  widget.hintText,
+                  style: GoogleFonts.urbanist(fontSize: 16, color: Colors.black.withOpacity(0.65), fontWeight: FontWeight.w400),
+                ),
               ),
               value: _selectedItem,
               onChanged: (dynamic newValue) {
@@ -59,7 +70,7 @@ class _OurListObjectDropDownState extends State<OurListObjectDropDown> {
               },
               underline: const SizedBox(),
               isExpanded: true,
-              icon: const Icon(Icons.keyboard_arrow_down_rounded),
+              icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.textAndOutlineColor,),
               iconEnabledColor: AppColors.appPrimaryLightColor,
               dropdownColor: Colors.white,
               style: GoogleFonts.urbanist(fontSize: 16, color: Colors.black54, fontWeight: FontWeight.w600),
@@ -69,9 +80,17 @@ class _OurListObjectDropDownState extends State<OurListObjectDropDown> {
                   onTap: () {
                     widget.onDropdownChanged(item);
                   },
-                  child: Text(
-                    item[widget.keyName].toString(),
-                    style: const TextStyle(fontSize: 16, color: Colors.black54),
+                  child: ShaderMask(
+                    blendMode: BlendMode.srcIn,
+                    shaderCallback: (bounds) => LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [AppColors.textAndOutlineTop, AppColors.textAndOutlineBottom],
+                    ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                    child: Text(
+                      item[widget.keyName].toString(),
+                      style: const TextStyle(fontSize: 16, color: Colors.black54),
+                    ),
                   ),
                 );
               }).toList(),

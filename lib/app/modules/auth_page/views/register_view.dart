@@ -11,11 +11,13 @@ import '../../../app_constants/app_strings.dart';
 import '../../../app_widgets/app_text_fields.dart';
 import '../../../app_widgets/app_text_styles.dart';
 import '../../../app_widgets/custom_solid_button.dart';
+import '../../profile/views/profile_details_view.dart';
 
 class RegisterView extends GetView<AuthPageController> {
   const RegisterView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(AuthPageController());
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -25,7 +27,8 @@ class RegisterView extends GetView<AuthPageController> {
             SizedBox(height: 15,),
 
             Form(
-              key: controller.signUpFormKey,
+              // key: controller.signUpFormKey,
+              key: controller.updateAdditionalProfileFormKey,
               child: Column(
                 children: [
                   AppTextField(controller: controller.fullNameTextEditingController,hinText: AppString.signUpHintTextForFullName ),
@@ -37,7 +40,9 @@ class RegisterView extends GetView<AuthPageController> {
                   SizedBox(height: 15,),
                   CustomSolidButton(text: AppString.signUpButtonText, onTap: (){
                     if(GetUtils.isEmail(controller.signUpEmailTextEditingController.text)){
+                      print('From sign up: first IF');
                       if(controller.signUpPasswordTextEditingController.text==controller.signUpConfirmPasswordTextEditingController.text){
+                        print('From sign up: second IF');
                         controller.getStartRegistration();
                       }else{
                         AppServices().showToastMessage(toastMessage: 'Password not matched!');

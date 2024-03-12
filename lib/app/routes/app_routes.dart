@@ -8,6 +8,7 @@ abstract class Routes {
   static const SPLASH_SCREEN = _Paths.SPLASH_SCREEN;
   static const PROFILE = _Paths.PROFILE;
   static const CREATE_JOB = _Paths.CREATE_JOB;
+  static const ROSTER_HISTORY_PAGE = _Paths.ROSTER_HISTORY_PAGE;
   static const DECLARATION_PAGE = _Paths.DECLARATION_PAGE;
   static const TERM_AND_CONDITION = _Paths.TERM_AND_CONDITION;
 }
@@ -19,6 +20,8 @@ abstract class _Paths {
   static const SPLASH_SCREEN = '/splash-screen';
   static const PROFILE = '/profile';
   static const CREATE_JOB = '/create-job';
+  static const ROSTER_HISTORY_PAGE = '/roster-history';
   static const DECLARATION_PAGE = '/declaration-page';
+  static const DAILY_LOGIN = '/daily-login-page';
   static const TERM_AND_CONDITION = '/term-and-condition';
 }

@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:signature/signature.dart';
 import 'package:staffin_softwares/app/app_constants/getstorage_keys.dart';
-import 'package:staffin_softwares/app/modules/declaration_page/model/user_rego_class_model.dart';
 import 'package:staffin_softwares/app/modules/declaration_page/views/information_needed_before_start_view.dart';
 import 'package:staffin_softwares/app/modules/home/bindings/home_binding.dart';
 import 'package:staffin_softwares/app/modules/home/views/home_view.dart';
@@ -33,7 +32,7 @@ class DeclarationPageController extends GetxController {
       'value': false,
     },
     {
-      'title': 'Are you under the influence of alcohol/ drugs or any meditations that would effect you in any way to perform your duties?',
+      'title': 'Are you free from the influence of alcohol/drugs or any medications that would affect you in any way to perform your duties?',
       'value': false,
     },
     {
@@ -74,6 +73,7 @@ class DeclarationPageController extends GetxController {
 
   var truckDamageImagePath1 = "".obs;
   var truckDamageImagePath2 = "".obs;
+  var fuelCardImagePath = "".obs;
 
   @override
   void onInit() {
@@ -101,6 +101,8 @@ class DeclarationPageController extends GetxController {
               if(isReadTermsAndCondition.value){
                 CustomLoader.showLoader();
                 provider.fetchCustomerList().then((customerListResponse)async {
+                  print('-----------------customerListResponse-customerListResponse-------------------');
+                  print(customerListResponse.statusCode.toString());
                   await provider.fetchRego().then((regoResponseValue) async{
                     CustomLoader.cancelLoader();
                     var customerListDecodedData=jsonDecode(await customerListResponse.stream.bytesToString());
@@ -117,7 +119,7 @@ class DeclarationPageController extends GetxController {
                           regoData.add(x['rego']);
                         }
                         userRegoId.value=regoDecodedData['data'][0]['rego']!;
-                        Get.to(() => const InformationNeededBeforeStartView(),);
+                        // Get.to(() => const InformationNeededBeforeStartView(),);
                       }else{
                         AppServices().showToastMessage(toastMessage: 'Customer not available');
                       }

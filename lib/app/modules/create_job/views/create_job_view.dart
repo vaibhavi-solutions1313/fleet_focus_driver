@@ -40,77 +40,96 @@ class CreateJobView extends GetView<CreateJobController> {
                     padding: const EdgeInsets.all(12.0),
                     shrinkWrap: true,
                     children: [
-                      Obx(() =>controller.data.isNotEmpty? CustomDropdownButton(data: controller.data, controller: controller.customerNameTextEditingController, hinText: AppString.informationNeededPageClientText,):SizedBox.shrink()),
-                      //AppTextField(controller: controller.numberOfDeliveryTextEditingController, hinText: AppString.createJobPageHintTextForNumberOfDelivery),
+                      Obx(() =>controller.data.isNotEmpty
+                          ? CustomDropdownButton(data: controller.data, controller: controller.customerNameTextEditingController, hinText: AppString.informationNeededPageClientText,)
+                          : SizedBox.shrink()),
+                      AppTextField(controller: controller.numberOfDeliveryTextEditingController, hinText: AppString.createJobPageHintTextForNumberOfDelivery),
                       AppTextField(controller: controller.deliveryFromTextEditingController, hinText: AppString.createJobPageHintTextForDeliveryFrom),
                       AppTextField(controller: controller.deliveryToTextEditingController, hinText: AppString.createJobPageHintTextForDeliveryTo),
                       AppTextField(controller: controller.jobNumberTextEditingController, hinText: AppString.createJobPageHintTextForJobNumber),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(height: 16.0,),
-
-                          TextFormField(
-                            onTap: () async {
-                              picker.DatePicker.showDateTimePicker(context,
-                                  showTitleActions: true, minTime: DateTime(1932, 3, 5), maxTime: DateTime.now(), onChanged: (date) {}, onConfirm: (date) {
-                                    print('confirm $date');
-                                    controller.pickUpTimeTextEditingController.text=DateFormat('dd-MM-yyy').add_Hm().format(date);
-                                  }, currentTime: DateTime.now(), locale: LocaleType.en);
-                            },
-                            controller:  controller.pickUpTimeTextEditingController,
-                            readOnly: true,
-                            validator: (v){
-                              if(v!.isEmpty) {
-                                return 'Fill the field';
-                              }else{
-                                return null;
-                              }
-                            },
-                            onChanged: (v){
-
-                            },
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
-                              filled: true,
-                              fillColor: AppColors.textFilledColor,
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  borderSide: BorderSide.none
+                          Container(
+                            margin: EdgeInsets.symmetric(horizontal: 8),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                    color: AppColors.textAndOutlineBottom,
+                                    width: 1.0
+                                )
+                            ),
+                            child: TextFormField(
+                              onTap: () async {
+                                picker.DatePicker.showDateTimePicker(context,
+                                    showTitleActions: true, minTime: DateTime(1932, 3, 5), maxTime: DateTime.now(), onChanged: (date) {}, onConfirm: (date) {
+                                      print('confirm $date');
+                                      controller.pickUpTimeTextEditingController.text=DateFormat('dd-MM-yyy').add_Hm().format(date);
+                                    }, currentTime: DateTime.now(), locale: LocaleType.en);
+                              },
+                              controller:  controller.pickUpTimeTextEditingController,
+                              readOnly: true,
+                              style: GoogleFonts.urbanist(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: AppColors.textAndOutlineColor,
                               ),
-                              hintText:  AppString.createJobPageHintTextForPickUpTime,
-                              prefix: controller.pickUpTimeTextEditingController.text.isNotEmpty?Text('${ AppString.createJobPageHintTextForPickUpTime}:',style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),):Text(''),
-                              hintStyle: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),
-                              suffixIcon: const Icon(Icons.calendar_month_rounded),
-                              suffixIconColor: AppColors.appPrimaryLightColor,
+                              validator: (v){
+                                if(v!.isEmpty) {
+                                  return 'Fill the field';
+                                }else{
+                                  return null;
+                                }
+                              },
+                              onChanged: (v){
+
+                              },
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+                                filled: true,
+                                fillColor: AppColors.whiteColor,
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    borderSide: BorderSide.none
+                                ),
+                                hintText:  AppString.createJobPageHintTextForPickUpTime,
+                                prefix: controller.pickUpTimeTextEditingController.text.isNotEmpty?Text('${ AppString.createJobPageHintTextForPickUpTime}:',style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textAndOutlineColor.withOpacity(0.4)),):Text(''),
+                                hintStyle: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textAndOutlineColor.withOpacity(0.4)),
+                                suffixIcon: const Icon(Icons.access_time),
+                                suffixIconColor: AppColors.appPrimaryLightColor,
+                              ),
                             ),
                           ),
                         ],
                       ),
                       AppTextField(controller: controller.remarksTextEditingController, hinText: AppString.createJobPageHintTextForRemarks),
+                      const SizedBox(
+                        height: 20,
+                      ),
                       CustomImageContainer(
                         controller: controller.signatureImagePathTextEditingController,
                         hinText: AppString.createJobPageHintTextForSign,
                       ),
+
+                      // const Text15By500(text: 'Draw your signature'),
+                      // const SizedBox(
+                      //   height: 6,
+                      // ),
+                      // Container(
+                      //     padding: EdgeInsets.all(1.0),
+                      //     decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(16.0),
+                      //     ),
+                      //     child: ClipRRect(
+                      //       borderRadius: BorderRadius.circular(16.0),
+                      //       child: Signature(
+                      //           height: 120, backgroundColor: AppColors.lightBlackishTextColor.withOpacity(0.2), controller: controller.signatureController),
+                      //     )),
                       const SizedBox(
-                        height: 10,
-                      ),
-                      const Text15By500(text: 'Draw your signature'),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Container(
-                          padding: EdgeInsets.all(1.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(16.0),
-                            child: Signature(
-                                height: 120, backgroundColor: AppColors.lightBlackishTextColor.withOpacity(0.2), controller: controller.signatureController),
-                          )),
-                      const SizedBox(
-                        height: 30,
+                        height: 50,
                       ),
                       CustomSolidButton(
                           text: AppString.createJobPageUpdateButtonText,

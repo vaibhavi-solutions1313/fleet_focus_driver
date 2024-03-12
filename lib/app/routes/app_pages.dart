@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:staffin_softwares/app/modules/auth_page/views/daily_login_page_view.dart';
 
 import '../modules/auth_page/bindings/auth_page_binding.dart';
 import '../modules/auth_page/views/auth_page_view.dart';
@@ -8,6 +9,7 @@ import '../modules/declaration_page/bindings/declaration_page_binding.dart';
 import '../modules/declaration_page/views/declaration_page_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
+import '../modules/home/views/roster_history.dart';
 import '../modules/profile/bindings/profile_binding.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/splash_screen/bindings/splash_screen_binding.dart';
@@ -28,6 +30,12 @@ class AppPages {
       page: () => const HomeView(),
       bindings: [HomeBinding(), CreateJobBinding()],
     ),
+    GetPage(
+      name: _Paths.ROSTER_HISTORY_PAGE,
+      page: () => const ShowRosterHistoryView(),
+      bindings: [HomeBinding(), CreateJobBinding()],
+    ),
+
     GetPage(
       name: _Paths.AUTH_PAGE,
       page: () => const AuthPageView(),
@@ -52,6 +60,10 @@ class AppPages {
       name: _Paths.DECLARATION_PAGE,
       page: () => const DeclarationPageView(),
       binding: DeclarationPageBinding(),
+    ),
+    GetPage(
+      name: _Paths.DAILY_LOGIN,
+      page: () => const DailyLoginPageView(),
     ),
     GetPage(
       name: _Paths.TERM_AND_CONDITION,

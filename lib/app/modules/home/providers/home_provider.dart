@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
 import 'package:http/http.dart'as http;
+import 'package:staffin_softwares/app/modules/home/model/user_roaster_model_class.dart';
 import 'package:staffin_softwares/main.dart';
 
 class HomeProvider extends GetConnect {
@@ -29,13 +32,24 @@ class HomeProvider extends GetConnect {
     var headers = {
       'Authorization': 'Bearer $loginToken'
     };
-    var request = http.Request('GET', Uri.parse('https://truckapp.store/api/fetch-roaster'));
+    // var request = http.Request('GET', Uri.parse('https://truckapp.store/api/fetch-roaster'));
+    var request = http.Request('GET', Uri.parse('https://truckapp.store/api/fetch-driver-roaster'));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
+    print('fetchUSerRoaster:: ${response}');
     return response;
-
   }
 
+  Future<http.StreamedResponse> fetchRosterHistory()async{
+    var headers = {
+      'Authorization': 'Bearer $loginToken'
+    };
+    var request = http.Request('GET', Uri.parse('https://truckapp.store/api/get-roaster-history'));
+    request.headers.addAll(headers);
+    http.StreamedResponse response = await request.send();
+    print('fetchRoasterHistory:: ${response}');
+    return response;
+  }
 
   Future<http.StreamedResponse> fetchAcceptRoaster({required String roasterId,required String isAccepted})async{
     var headers = {
@@ -85,6 +99,19 @@ class HomeProvider extends GetConnect {
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
    return response;
+  }
+
+  Future<http.StreamedResponse> fetchTimeDuration()async{
+    var headers = {
+      'Authorization': 'Bearer $loginToken'
+    };
+    var request = http.Request('GET', Uri.parse('https://truckapp.store/api/fetch-timer'));
+
+    request.headers.addAll(headers);
+
+    http.StreamedResponse response = await request.send();
+    return response;
+
   }
 
 

@@ -15,7 +15,8 @@ class TermAndConditionView extends GetView<TermAndConditionController> {
         children: [
           SafeArea(child: const CustomAppBar(title: 'Term and Condition')),
           Expanded(
-            child: SingleChildScrollView(
+            child:
+            SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 15),
               child: FutureBuilder<String>(
                   future: controller.getTermAndCondition(),

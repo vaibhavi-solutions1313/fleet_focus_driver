@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +14,12 @@ import '../../../app_widgets/custom_solid_button.dart';
 import '../../../app_widgets/our_dropdown.dart';
 import '../controllers/auth_page_controller.dart';
 
+
 class UpdateAdditionalInfoView extends GetView<AuthPageController> {
   const UpdateAdditionalInfoView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // CustomLoader.cancelLoader();
+    Get.put(AuthPageController());// CustomLoader.cancelLoader();
     return Scaffold(
       body:ListView(
         padding: EdgeInsets.all(16.0),
@@ -102,7 +102,7 @@ class UpdateAdditionalInfoView extends GetView<AuthPageController> {
                                 controller.isRegisteredForGst.value=v!;
                               },
                               ),
-                              Text15By500(text: 'Yes'),
+                              const Text15By500(text: 'Yes'),
                             ],
                           ),
                           Row(
@@ -153,11 +153,14 @@ class UpdateAdditionalInfoView extends GetView<AuthPageController> {
                           // fillColor: AppColors.whiteColor,
                             checkColor: AppColors.appPrimaryLightColor,
                             activeColor: AppColors.creamColor,
-                            side: BorderSide(color: controller.isReadTermsAndCondition.value?AppColors.appPrimaryColor:AppColors.textFillHintTextColor),
+                            side: BorderSide(color: controller.isReadContracts.value?AppColors.appPrimaryColor:AppColors.textFillHintTextColor),
                             materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                             splashRadius: 0.0,
-                            value: controller.isReadTermsAndCondition.value, onChanged: (v){
-                          controller.isReadTermsAndCondition.value=v!;
+                            value: controller.isReadContracts.value, onChanged: (v){
+                          controller.isReadContracts.value=v!;
+                          if(v==true){
+                            controller.userContract(abn: controller.abnTextEditingController.text, name: controller.fullNameTextEditingController.text);
+                          }
                         })
                         ),
                       ),
@@ -167,12 +170,50 @@ class UpdateAdditionalInfoView extends GetView<AuthPageController> {
                             text: TextSpan(
                                 style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.darkBlackishTextColor),
                                 children: [
-                                  const TextSpan(text:'${AppString.additionalProfileInfoReadTerms} '),
-                                  TextSpan(
-                                      recognizer: TapGestureRecognizer()..onTap=(){
-                                        // Get.back();
-                                      },
-                                      text:AppString.additionalProfileInfoTermsAndCondition,style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.appPrimaryLightColor)),
+                                  const TextSpan(text:'${AppString.contract} '),
+                                  // TextSpan(
+                                  //     recognizer: TapGestureRecognizer()..onTap=(){
+                                  //       // Get.back();
+                                  //     },
+                                  //     text:AppString.additionalProfileInfoTermsAndCondition,style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.appPrimaryLightColor)),
+                                ]
+                            )),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 24,
+                        width: 24,
+                        child: Obx(() => Checkbox(
+                          // fillColor: AppColors.whiteColor,
+                            checkColor: AppColors.appPrimaryLightColor,
+                            activeColor: AppColors.creamColor,
+                            side: BorderSide(color: controller.isReadDeed.value?AppColors.appPrimaryColor:AppColors.textFillHintTextColor),
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            splashRadius: 0.0,
+                            value: controller.isReadDeed.value, onChanged: (v){
+                          controller.isReadDeed.value=v!;
+                          if(v==true){
+                            controller.userDeed(abn: controller.abnTextEditingController.text, name: controller.fullNameTextEditingController.text, address: controller.addressTextEditingController.text);
+                          }
+                        })
+                        ),
+                      ),
+                      Expanded(
+                        child: RichText(
+                          // textAlign: TextAlign.center,
+                            text: TextSpan(
+                                style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.darkBlackishTextColor),
+                                children: [
+                                  const TextSpan(text:'${AppString.deed} '),
+                                  // TextSpan(
+                                  //     recognizer: TapGestureRecognizer()..onTap=(){
+                                  //       // Get.back();
+                                  //     },
+                                  //     text:AppString.additionalProfileInfoTermsAndCondition,style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w500,color: AppColors.appPrimaryLightColor)),
                                 ]
                             )),
                       ),

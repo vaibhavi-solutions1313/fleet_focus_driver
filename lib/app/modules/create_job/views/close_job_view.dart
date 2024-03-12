@@ -19,6 +19,7 @@ import '../../../app_widgets/our_dropdown_strings.dart';
 
 class CloseJobView extends GetView<CreateJobController> {
   const CloseJobView({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CreateJobController(), permanent: true);
@@ -39,41 +40,64 @@ class CloseJobView extends GetView<CreateJobController> {
                   SizedBox(
                     height: 10.0,
                   ),
-                  TextFormField(
-                    controller: controller.totalJobTextEditingController,
-                    keyboardType: TextInputType.phone,
-                    validator: (v) {
-                      if (v!.isEmpty) {
-                        return 'Fill the field';
-                      } else {
-                        return null;
-                      }
-                    },
-                    onChanged: (v) {
-                      if (v.isNotEmpty) {
-                        print('gggggggggggggggggggggggg');
-                        controller.totalJob.value = int.parse(v);
-                        controller.totalJob.value < 1
-                            ? controller.totalJob.value = 1
-                            : controller.totalJob.value > 10
-                                ? controller.totalJob.value = 10
-                                : controller.totalJob.value = controller.totalJob.value;
-                        controller.totalJobTextEditingController.text = controller.totalJob.value.toString();
-                      } else {
-                        controller.totalJob.value = 1;
-                        controller.totalJobTextEditingController.clear();
-                      }
-                      controller.closeJobList.clear();
-                    },
-                    decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
-                        filled: true,
-                        fillColor: AppColors.textFilledColor,
-                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12.0), borderSide: BorderSide.none),
-                        hintText: AppString.informationNeededPageTextNumberOfJobs,
-                        // prefix: Text( AppString.informationNeededPageTextNumberOfJobs ,style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),),
-                        hintStyle: GoogleFonts.urbanist(fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.textFillHintTextColor),
-                        suffixText: 'Max 10'),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                            color: AppColors.textAndOutlineBottom, width: 1.0)),
+                    child: TextFormField(
+                      style: GoogleFonts.urbanist(
+                          fontSize: 15.5,
+                          color: AppColors.textAndOutlineBottom,
+                          fontWeight: FontWeight.w500),
+                      controller: controller.totalJobTextEditingController,
+                      keyboardType: TextInputType.phone,
+                      validator: (v) {
+                        if (v!.isEmpty) {
+                          return 'Fill the field';
+                        } else {
+                          return null;
+                        }
+                      },
+                      onChanged: (v) {
+                        if (v.isNotEmpty) {
+                          print(
+                              '---------------------- Number of jobs -------------------');
+                          controller.totalJob.value = int.parse(v);
+                          controller.totalJob.value < 1
+                              ? controller.totalJob.value = 1
+                              : controller.totalJob.value > 10
+                                  ? controller.totalJob.value = 10
+                                  : controller.totalJob.value =
+                                      controller.totalJob.value;
+                          controller.totalJobTextEditingController.text =
+                              controller.totalJob.value.toString();
+                        } else {
+                          controller.totalJob.value = 1;
+                          controller.totalJobTextEditingController.clear();
+                        }
+                        controller.closeJobList.clear();
+                      },
+                      decoration: InputDecoration(
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 16.0),
+                          filled: true,
+                          fillColor: AppColors.whiteColor,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12.0),
+                              borderSide: BorderSide.none),
+                          hintText:
+                              AppString.informationNeededPageTextNumberOfJobs,
+                          // prefix: Text( AppString.informationNeededPageTextNumberOfJobs ,style: GoogleFonts.urbanist(fontSize: 15,fontWeight: FontWeight.w600,color: AppColors.textFillHintTextColor),),
+                          hintStyle: GoogleFonts.urbanist(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                              color: AppColors.textAndOutlineColor
+                                  .withOpacity(0.4)),
+                          suffixText: 'Max 10'),
+                    ),
                   ),
                   SizedBox(
                     height: 10.0,
@@ -128,7 +152,8 @@ class CloseJobView extends GetView<CreateJobController> {
                             CustomLoader.cancelLoader();
                           });
                         } else {
-                          AppServices().showToastMessage(toastMessage: 'Please provide all information.');
+                          AppServices().showToastMessage(
+                              toastMessage: 'Please provide all information.');
                         }
                       }),
                 ],
@@ -143,6 +168,7 @@ class CloseJobView extends GetView<CreateJobController> {
 
 class CloseJobFormWidget extends StatefulWidget {
   final int index;
+
   const CloseJobFormWidget({super.key, required this.index});
 
   @override
@@ -166,15 +192,21 @@ class _CloseJobFormWidgetState extends State<CloseJobFormWidget> {
   TextEditingController customerEditingController = TextEditingController();
   TextEditingController shrubTextEditingController = TextEditingController();
   TextEditingController statusTextEditingController = TextEditingController();
+
   // TextEditingController latitudeTextEditingController = TextEditingController();
   // TextEditingController longitudeTextEditingController = TextEditingController();
   TextEditingController odometerTextEditingController = TextEditingController();
 
-  TextEditingController closeRemarksTextEditingController = TextEditingController();
-  TextEditingController frontImageImageTextEditingController = TextEditingController();
-  TextEditingController backImageTextEditingController = TextEditingController();
-  TextEditingController leftImageTextEditingController = TextEditingController();
-  TextEditingController rightImageTextEditingController = TextEditingController();
+  TextEditingController closeRemarksTextEditingController =
+      TextEditingController();
+  TextEditingController frontImageImageTextEditingController =
+      TextEditingController();
+  TextEditingController backImageTextEditingController =
+      TextEditingController();
+  TextEditingController leftImageTextEditingController =
+      TextEditingController();
+  TextEditingController rightImageTextEditingController =
+      TextEditingController();
 
   // {
   // 'job_number': "",
@@ -204,11 +236,15 @@ class _CloseJobFormWidgetState extends State<CloseJobFormWidget> {
                 selectedJobData.addAll(value);
                 jobNumberEditingController.text = value['id'].toString();
                 customerEditingController.text = value['company'].toString();
-                odometerTextEditingController.text = value['odometer_value'].toString();
+                odometerTextEditingController.text =
+                    value['odometer_value'].toString();
                 setState(() {
-                  controller.closeJobList[widget.index]['job_number'] = value['id'].toString();
-                  controller.closeJobList[widget.index]['odo_value'] = value['odometer_value'].toString();
-                  controller.closeJobList[widget.index]['customer_name'] = value['company'].toString();
+                  controller.closeJobList[widget.index]['job_number'] =
+                      value['id'].toString();
+                  controller.closeJobList[widget.index]['odo_value'] =
+                      value['odometer_value'].toString();
+                  controller.closeJobList[widget.index]['customer_name'] =
+                      value['company'].toString();
                 });
               },
             )),
@@ -226,7 +262,9 @@ class _CloseJobFormWidgetState extends State<CloseJobFormWidget> {
             controller.closeJobList[widget.index]['shrub'] = p0;
           },
         ),
-        SizedBox(height: 16.0,),
+        SizedBox(
+          height: 16.0,
+        ),
         OurListStringDropDown(
             onDropdownChanged: (value) {
               controller.closeJobList[widget.index]['status'] = value;
@@ -253,7 +291,444 @@ class _CloseJobFormWidgetState extends State<CloseJobFormWidget> {
             controller.closeJobList[widget.index]['odo_value'] = p0;
           },
         ),
-        const Text15By500(text: AppString.informationNeededPageTextUploadTruckPhotos),
+        const SizedBox(
+          height: 20.0,
+        ),
+
+        /// updated image upload view
+        Container(
+          padding: EdgeInsets.all(8.0),
+          // height: 100,
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              /// first row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Truck front image
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.cloud_upload_outlined,
+                              color: AppColors.textAndOutlineColor,
+                              size: 15,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString
+                                    .informationNeededPageTextUploadTruckFrontImage,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          controller.pickImage().then((value) {
+                            if (value != null) {
+                              truckFrontImagePath = value;
+                              controller.closeJobList[widget.index]
+                                  ['front_image'] = value;
+                              setState(() {});
+                            }
+                          });
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 80,
+                          // padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
+                          decoration: BoxDecoration(
+                            color:
+                                AppColors.imageContainerFill.withOpacity(0.38),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(1.0, 1.0),
+                                  color: AppColors.textFilledColor,
+                                  spreadRadius: 2.0)
+                            ],
+                          ),
+                          child: truckFrontImagePath == ""
+                              ? Center(
+                                  child: ShaderMask(
+                                    blendMode: BlendMode.srcIn,
+                                    shaderCallback: (bounds) => LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        AppColors.textAndOutlineTop,
+                                        AppColors.textAndOutlineBottom
+                                      ],
+                                    ).createShader(Rect.fromLTWH(
+                                        0, 0, bounds.width, bounds.height)),
+                                    child: Text(
+                                      AppString.closeJobPageUploadTruckPhoto,
+                                      style: GoogleFonts.lato(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors
+                                              .lightBlackishTextColor69),
+                                    ),
+                                  ),
+                                )
+                              : Image.file(File(truckFrontImagePath), fit: BoxFit.fill),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    width: 10,
+                  ),
+
+                  // Truck back image
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Truck front image
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.cloud_upload_outlined,
+                              color: AppColors.textAndOutlineColor,
+                              size: 15,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString
+                                    .informationNeededPageTextUploadTruckBackImage,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      // Truck back image
+                      InkWell(
+                        onTap: () {
+                          controller.pickImage().then((value) {
+                            if (value != null) {
+                              truckBackImagePath = value;
+                              controller.closeJobList[widget.index]
+                              ['back_image'] = value;
+                              setState(() {});
+                            }
+                          });
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 80,
+                          // padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                          decoration: BoxDecoration(
+                            color:
+                            AppColors.imageContainerFill.withOpacity(0.38),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(1.0, 1.0),
+                                  color: AppColors.textFilledColor,
+                                  spreadRadius: 2.0)
+                            ],
+                          ),
+                          child: truckBackImagePath == ""
+                              ? Center(
+                            child: ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString.closeJobPageUploadTruckPhoto,
+                                style: GoogleFonts.lato(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors
+                                        .lightBlackishTextColor69),
+                              ),
+                            ),
+                          )
+                              : Image.file(File(truckBackImagePath), fit: BoxFit.fill,),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              /// second row
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Truck right image
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.cloud_upload_outlined,
+                              color: AppColors.textAndOutlineColor,
+                              size: 15,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString
+                                    .informationNeededPageTextUploadTruckRightImage,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          controller.pickImage().then((value) {
+                            if (value != null) {
+                              truckRightImagePath = value;
+                              controller.closeJobList[widget.index]
+                              ['right_image'] = value;
+                              setState(() {});
+                            }
+                          });
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 80,
+                          // padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                          decoration: BoxDecoration(
+                            color:
+                            AppColors.imageContainerFill.withOpacity(0.38),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(1.0, 1.0),
+                                  color: AppColors.textFilledColor,
+                                  spreadRadius: 2.0)
+                            ],
+                          ),
+                          child: truckRightImagePath == ""
+                              ? Center(
+                            child: ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString.closeJobPageUploadTruckPhoto,
+                                style: GoogleFonts.lato(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors
+                                        .lightBlackishTextColor69),
+                              ),
+                            ),
+                          )
+                              : Image.file(File(truckRightImagePath), fit: BoxFit.fill,),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(
+                    width: 10,
+                  ),
+
+                  // Truck left image
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Truck front image
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                        child: Row(
+                          // mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Icon(
+                              Icons.cloud_upload_outlined,
+                              color: AppColors.textAndOutlineColor,
+                              size: 15,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString
+                                    .informationNeededPageTextUploadTruckLeftImage,
+                                style: TextStyle(
+                                  fontFamily: 'Lato',
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 6,
+                      ),
+                      // Truck back image
+                      InkWell(
+                        onTap: () {
+                          controller.pickImage().then((value) {
+                            if (value != null) {
+                              truckLeftImagePath = value;
+                              controller.closeJobList[widget.index]
+                              ['left_image'] = value;
+                              setState(() {});
+                            }
+                          });
+                        },
+                        child: Container(
+                          width: 150,
+                          height: 80,
+                          // padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12.0),
+                          decoration: BoxDecoration(
+                            color:
+                            AppColors.imageContainerFill.withOpacity(0.38),
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                  offset: Offset(1.0, 1.0),
+                                  color: AppColors.textFilledColor,
+                                  spreadRadius: 2.0)
+                            ],
+                          ),
+                          child: truckLeftImagePath == ""
+                              ? Center(
+                            child: ShaderMask(
+                              blendMode: BlendMode.srcIn,
+                              shaderCallback: (bounds) => LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  AppColors.textAndOutlineTop,
+                                  AppColors.textAndOutlineBottom
+                                ],
+                              ).createShader(Rect.fromLTWH(
+                                  0, 0, bounds.width, bounds.height)),
+                              child: Text(
+                                AppString.closeJobPageUploadTruckPhoto,
+                                style: GoogleFonts.lato(
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w500,
+                                    color: AppColors
+                                        .lightBlackishTextColor69),
+                              ),
+                            ),
+                          )
+                              : Image.file(File(truckLeftImagePath), fit: BoxFit.fill,),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        /// old image upload view
+        /*const Text15By500(text: AppString.informationNeededPageTextUploadTruckPhotos),
         const SizedBox(
           height: 6,
         ),
@@ -504,7 +979,7 @@ class _CloseJobFormWidgetState extends State<CloseJobFormWidget> {
               ],
             ),
           ),
-        ),
+        ),*/
         const SizedBox(height: 20.0),
       ],
     );

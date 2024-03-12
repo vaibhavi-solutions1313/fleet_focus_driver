@@ -1,6 +1,10 @@
 
 class AppString{
 
+  /// pdf asset url
+  static const String termsConditionsPdf = 'assets/pdf/terms_condition.pdf';
+  static const String deedsPdf = 'assets/pdf/deed_of_restraint.pdf';
+
   ///Splash screen Text
   static const String splashScreenStringTitle='Simplify Fright, Anywhere.';
   static const String splashScreenStringSubTitle='Empowering';
@@ -31,6 +35,7 @@ class AppString{
   static const String informationNeededPageRegistrationText='Rego';
   static const String informationNeededPageTextOdometer='Odometer';
   static const String informationNeededPageTextUploadTruckPhotos='Upload Truck Photos';
+  static const String closeJobPageUploadTruckPhoto='Upload Photo';
   static const String informationNeededPageTextUploadTruckFrontImage='Truck Front Image';
   static const String informationNeededPageTextUploadTruckBackImage='Truck Back Image';
   static const String informationNeededPageTextUploadTruckRightImage='Truck Right Image';
@@ -62,8 +67,13 @@ class AppString{
   static const String signUpHintTextForReferralCode='Enter Referral Code/Company Name';
   //Button
   static const String signUpButtonText='Sign Up';
-  static const String signUpPageStringHaveAlreadyAccount='have an account Already? ';
+  static const String signUpPageStringHaveAlreadyAccount='Have an account Already? ';
   static const String signUpPageStringForLoginNow=' Login Now';
+  static const String dailyLoginTruckDetails='Truck Details';
+  static const String driverNumberTruckDetails='Driver Number';
+  static const String regoTruckDetails='Select Rego';
+  static const String odometerValueTruckDetails='Odometer Value';
+  static const String saveButtonText='Save';
 
   ///Profile page
   static const String profilePageTitle='Profile';
@@ -73,13 +83,13 @@ class AppString{
   static const String profilePageCurrentPassword='Old Password';
   static const String profilePageNewPassword='New Password';
   static const String profilePageConfirmNewPassword='Confirm New Password';
-  static const String profilePagePasswordUpdatedSuccessfulMessage='Password updated uccessfully';
+  static const String profilePagePasswordUpdatedSuccessfulMessage='Password updated successfully';
   static const String profilePageUpdateButtonText='Update';
 ///Update Profile
   static const String updateProfilePageTitle=profilePageTitle;
   static const String updateProfilePageHintTextForFullName=signUpHintTextForFullName;
   static const String updateProfilePageHintTextForDob='Date of Birth';
-  static const String updateProfilePageHintTextForAge='Age in years';
+  static const String updateProfilePageHintTextForAge='Age in Years';
   static const String updateProfilePageHintTextForNationality='Nationality';
   static const String updateProfilePageHintTextForState='Your state';
   static const String updateProfilePagePassportNumber='Passport number';
@@ -104,13 +114,17 @@ class AppString{
   static const String additionalProfileInfoPageRegisteredForGST='Are you Registered for GST?';
   static const String additionalProfileInfoPageBankName='Name of Bank';
   static const String additionalProfileInfoPageBSB='Enter BSB';
-  static const String additionalProfileInfoPageAbn='Abn';
-  static const String additionalProfileInfoPageAccountNumber='Account Number';
+  static const String additionalProfileInfoPageAbn='Enter Abn';
+  static const String additionalProfileInfoPageAccountNumber='Enter Account Number';
   static const String additionalProfileInfoPageCnfAccountNumber='Confirm Account Number';
   static const String additionalProfileInfoPageSignature='Upload Signature';
   static const String additionalProfileInfoButtonSave=declarationPageButtonText;
   static const String additionalProfileInfoReadTerms='I have read and I agree with the';
+  static const String contract='By ticking this box I AGREE to the terms and condition of this contract.';
+  static const String deed='By ticking this box I AGREE to accept this Deed of Restraint.';
   static const String additionalProfileInfoTermsAndCondition='terms and conditions.';
+  static const String additionalProfileInfoDeed='Deed of Restraint.';
+  static const String additionalProfileInfoReadDeed='By ticking this box I AGREE to accept this';
 
   ///Wages Page
   static const String wagesPageTitle='Wages';
@@ -120,13 +134,14 @@ class AppString{
 
   ///Create Job
   static const String createJobPageTitle='Create Job';
-  static const String createJobPageHintTextForNumberOfDelivery='Customer name';
+  static const String createJobPageHintTextForNumberOfDelivery='Number of Delivery';
   static const String createJobPageHintTextForDeliveryFrom='Delivery from';
   static const String createJobPageHintTextForDeliveryTo='Delivery to';
   static const String createJobPageHintTextForJobNumber='Job number';
   static const String createJobPageHintTextForPickUpTime='Pick up time';
   static const String createJobPageHintTextForRemarks='Remarks';
-  static const String createJobPageHintTextForSign='Select your image';
+  // static const String createJobPageHintTextForSign='Select your image';
+  static const String createJobPageHintTextForSign='Upload photos with a sign';
   static const String createJobPageUpdateButtonText=profilePageUpdateButtonText;
 
 

@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:staffin_softwares/app/app_constants/app_url.dart';
+import 'package:staffin_softwares/app/modules/auth_page/views/contract_view.dart';
 
 class AuthProvider extends GetConnect {
   Future<http.StreamedResponse> getRequestLogin({
@@ -34,15 +35,17 @@ class AuthProvider extends GetConnect {
   }
 
   Future<http.StreamedResponse> registerUser(
-      {required Map data,
-      required String userAvatarPath,
-      required String passportImagePath,
-      required String passportBackImagePath,
-      required String visaImagePath,
-      required String abnImagePath,
-      required String licenseImagePath,
-      required String licenseBackImagePath,
-      required String signatureImagePath}) async {
+      {
+        required Map data,
+      // required String userAvatarPath,
+      // required String passportImagePath,
+      // required String passportBackImagePath,
+      // required String visaImagePath,
+      // required String abnImagePath,
+      // required String licenseImagePath,
+      // required String licenseBackImagePath,
+      // required String signatureImagePath
+      }) async {
     var request = http.MultipartRequest('POST', Uri.parse('https://truckapp.store/api/register'));
     request.fields.addAll({
       'ref_code': data['ref_code'],
@@ -50,7 +53,7 @@ class AuthProvider extends GetConnect {
       'email': data['email'],
       'password': data['password'],
       'password_confirmation': data['password'],
-      'address': data['address'],
+      /*'address': data['address'],
       'age': data['age'],
       'mobile_number': data['mobile_number'],
       'dob': data['dob'], //"2023-11-18",
@@ -68,18 +71,18 @@ class AuthProvider extends GetConnect {
       'license_state': data['license_state'],
       'license_number': data['license_number'],
       'employee_category': data['employee_category'],
-      'ip_address': data['ip_address'],
+      'ip_address': data['ip_address'],*/
       'is_condition_check': data['is_condition_check'],
     });
 
-    request.files.add(await http.MultipartFile.fromPath('photo', userAvatarPath));
-    request.files.add(await http.MultipartFile.fromPath('passport', passportImagePath));
-    // request.files.add(await http.MultipartFile.fromPath('passport_back', passportBackImagePath));
-    request.files.add(await http.MultipartFile.fromPath('visa', visaImagePath));
-    // request.files.add(await http.MultipartFile.fromPath('abn', abnImagePath));
-    request.files.add(await http.MultipartFile.fromPath('license', licenseImagePath));
-    request.files.add(await http.MultipartFile.fromPath('license_back', licenseBackImagePath));
-    request.files.add(await http.MultipartFile.fromPath('signature', signatureImagePath));
+    // request.files.add(await http.MultipartFile.fromPath('photo', userAvatarPath));
+    // request.files.add(await http.MultipartFile.fromPath('passport', passportImagePath));
+    // // request.files.add(await http.MultipartFile.fromPath('passport_back', passportBackImagePath));
+    // request.files.add(await http.MultipartFile.fromPath('visa', visaImagePath));
+    // // request.files.add(await http.MultipartFile.fromPath('abn', abnImagePath));
+    // request.files.add(await http.MultipartFile.fromPath('license', licenseImagePath));
+    // request.files.add(await http.MultipartFile.fromPath('license_back', licenseBackImagePath));
+    // request.files.add(await http.MultipartFile.fromPath('signature', signatureImagePath));
     print(request.fields.toString());
     http.StreamedResponse response = await request.send();
     return response;
@@ -102,4 +105,30 @@ class AuthProvider extends GetConnect {
     http.StreamedResponse response = await request.send();
     return response;
   }
+
+  ///Contract
+ Future<http.StreamedResponse> fetchUserContract({required String abn,required String name})async{
+   var request = http.MultipartRequest('POST', Uri.parse('https://truckapp.store/api/get-terms-page'));
+   request.fields.addAll({
+     'full_name': name,
+     'abn': abn
+   });
+   http.StreamedResponse response = await request.send();
+   return response;
+ }
+
+
+  Future<http.StreamedResponse> fetchDeed({required String abn,required String name,required String address,})async{
+   var request = http.MultipartRequest('POST', Uri.parse('https://truckapp.store/api/get-deed-page'));
+   request.fields.addAll({
+     'abn': abn,
+     'full_name': name,
+     'address': address
+   });
+   http.StreamedResponse response = await request.send();
+
+   return response;
+
+
+ }
 }

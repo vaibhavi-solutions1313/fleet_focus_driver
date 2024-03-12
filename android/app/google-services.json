@@ -1,21 +1,40 @@
 {
   "project_info": {
-    "project_number": "29565148878",
-    "project_id": "staffinsoftware-d4ec5",
-    "storage_bucket": "staffinsoftware-d4ec5.appspot.com"
+    "project_number": "1042373550213",
+    "project_id": "fleet-focus-pro",
+    "storage_bucket": "fleet-focus-pro.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:29565148878:android:3c972522e9a70b1575ba9f",
+        "mobilesdk_app_id": "1:1042373550213:android:679bc0b2d82b7ad2e389ec",
         "android_client_info": {
-          "package_name": "com.example.staffin_softwares"
+          "package_name": "com.app.fleetfocuspro"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDn20ff6Q2d4WAEGROE8dMjUa0-P8F6Jcs"
+          "current_key": "AIzaSyB4ea66U3ZIbCMqMp6ige0fUuccx_WhIt8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042373550213:android:caf1b0791339b46ae389ec",
+        "android_client_info": {
+          "package_name": "com.app.fleetfocusprodriver"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4ea66U3ZIbCMqMp6ige0fUuccx_WhIt8"
         }
       ],
       "services": {

@@ -36,13 +36,13 @@ class _UserAvatarState extends State<UserAvatar> {
           children: [
             CircleAvatar(
               backgroundColor: AppColors.appPrimaryLightColor,
-              radius: 35,
+              radius: 40,
               child: CircleAvatar(
-                radius: 33,
+                radius: 38,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(40),
                   child: selectedImage == null && widget.userAvatar!=null
-                      ? SvgPicture.network(widget.userAvatar!, fit: BoxFit.cover,)
+                      ? SvgPicture.network(widget.userAvatar!, fit: BoxFit.fill,)
                       : Image.file(
                     File(selectedImage!.path),
                     fit: BoxFit.fill,
@@ -76,11 +76,12 @@ class _UserAvatarState extends State<UserAvatar> {
           height: 15,
         ),
         Text(
-          'Profile picture',
-          style: GoogleFonts.lato(
-            fontSize: 12,
-            fontWeight: FontWeight.w600,
-            color: AppColors.lightBlackishTextColor69,
+          'Profile Picture',
+          style: TextStyle(
+              fontSize: 12,
+              fontFamily: 'Lato',
+              fontWeight: FontWeight.w400,
+              color: Color(0xFF7D7979)
           ),
         ),
       ],

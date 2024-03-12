@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:staffin_softwares/app/app_constants/app_colors.dart';
+import 'package:staffin_softwares/app/modules/auth_page/bindings/auth_page_binding.dart';
+import 'package:staffin_softwares/app/modules/auth_page/views/auth_page_view.dart';
 import 'package:staffin_softwares/app/modules/splash_screen/bindings/splash_screen_binding.dart';
 import 'package:staffin_softwares/app/modules/splash_screen/views/splash_screen_view.dart';
 
+import '../../../../main.dart';
 import '../../../../main.dart';
 import '../../../app_constants/app_strings.dart';
 import '../../../app_widgets/app_text_fields.dart';
@@ -16,6 +20,7 @@ class ProfileView extends GetView<ProfileController> {
   const ProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    Get.put(ProfileController());
     return Scaffold(
       body:  SingleChildScrollView( 
         child: Padding(
@@ -28,20 +33,28 @@ class ProfileView extends GetView<ProfileController> {
                   const CustomAppBar(title: AppString.updateProfilePageTitle),
                   IconButton(onPressed: (){
                     getStorage.erase();
-                    Get.offAll(()=>const SplashScreenView(),binding: SplashScreenBinding());
+                    // Get.offAll(()=>const SplashScreenView(),binding: SplashScreenBinding());
+                    Get.offAll(()=>const AuthPageView(),binding: AuthPageBinding());
                   }, icon: Icon(Icons.power_settings_new_rounded,color: Colors.red,))
                 ],
               ),
 
-              UserAvatar(userAvatar: userBasicInformation.data?.profilePhotoUrl,onTap: (v) {
+              UserAvatar(userAvatar: userBasicInformation.data?.profilePhotoUrl,
+                  onTap: (v) {
                 print(v);
               }),
+
+              SizedBox(height: 30,),
 
               AppTextField(controller: controller.fullNameTextEditingController, hinText: AppString.profilePageHintTextForFullName),
               AppTextField(controller: controller.mobileNumberTextEditingController, hinText: AppString.profileHintTextForMobile),
               AppTextField(controller: controller.addressTextEditingController, hinText: AppString.profilePageHintTextForAddress),
-          SizedBox(
-            height:20,),
+
+              // AppTextField(controller: controller.oldPasswordTextEditingController,hinText: AppString.profilePageCurrentPassword,textInputType: TextInputType.visiblePassword,isSuffixIcon: true,isSecureText: true,suffixIcon: Icons.remove_red_eye, ),
+              // AppTextField(controller: controller.newPasswordTextEditingController,hinText: AppString.profilePageNewPassword,textInputType: TextInputType.visiblePassword,isSuffixIcon: true,isSecureText: true,suffixIcon: Icons.remove_red_eye, ),
+              // AppTextField(controller: controller.cnfPasswordTextEditingController,hinText: AppString.profilePageConfirmNewPassword,textInputType: TextInputType.visiblePassword,isSuffixIcon: true,suffixIcon: Icons.remove_red_eye, ),
+
+              SizedBox(height: 15,),
               Obx(() => InkWell(
                   onTap:(){
                     controller.isUserNeedsToUpdatePassword.value=!controller.isUserNeedsToUpdatePassword.value;
@@ -60,7 +73,7 @@ class ProfileView extends GetView<ProfileController> {
                           ],
                         ))),
                     SizedBox(
-                      height:20,),
+                      height:30,),
                      CustomSolidButton(text: AppString.profilePageUpdateButtonText, onTap: (){
                        controller.getUpdatePassword(oldPassword: controller.oldPasswordTextEditingController.text.trim(), newPassword: controller.newPasswordTextEditingController.text.trim(), cnfPassword: controller.cnfPasswordTextEditingController.text.trim());
                      }),
